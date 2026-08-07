@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>桃太郎カオス3D</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="world"></canvas>
+
+    <section class="hud">
+      <h1>桃太郎カオス3D</h1>
+      <p id="chapter">第一章: 桃から生まれた桃太郎</p>
+
+      <div class="meterWrap">
+        <span>物語ゆがみ度</span>
+        <div class="meter"><div id="chaosBar"></div></div>
+        <span id="chaosText">0%</span>
+      </div>
+
+      <p id="status">WASD: 移動 / Space: ジャンプ / Shift: ダッシュ / E: 仲間にする / 1,2: 選択</p>
+      <p id="endingHint">鬼ヶ島の城に近づくと結末が確定します。</p>
+
+      <div class="tags">
+        <span id="teamTag">仲間: 0/3</span>
+        <span id="courageTag">勇気: 0</span>
+        <span id="kindnessTag">やさしさ: 0</span>
+      </div>
+    </section>
+
+    <section class="choicePanel hidden" id="choicePanel" aria-live="polite">
+      <h2 id="choiceTitle">物語の選択</h2>
+      <p id="choicePrompt">ここでどちらを選ぶ?</p>
+      <div class="choiceButtons">
+        <button id="choiceA" type="button">1: 正規ルートを選ぶ</button>
+        <button id="choiceB" type="button">2: 別の選択をする</button>
+      </div>
+    </section>
+
+    <section class="mobilePad" aria-label="モバイル操作">
+      <button data-key="w">↑</button>
+      <div>
+        <button data-key="a">←</button>
+        <button data-key="s">↓</button>
+        <button data-key="d">→</button>
+      </div>
+      <div>
+        <button data-key="shift">Dash</button>
+        <button data-key=" ">Jump</button>
+        <button data-key="e">Talk</button>
+      </div>
+    </section>
+
+    <section class="log" id="storyLog"></section>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

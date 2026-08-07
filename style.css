@@ -1,0 +1,201 @@
+:root {
+  --bg1: #f7e5cf;
+  --bg2: #d6e7df;
+  --bg3: #e7b2a2;
+  --ink: #1f140e;
+  --card: rgba(255, 248, 232, 0.88);
+  --accent: #bf2f1f;
+  --accent2: #2f7b55;
+  --warn: #d88a0f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 16% 16%, rgba(255, 255, 255, 0.55), transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.12) 0 8px,
+      rgba(0, 0, 0, 0.02) 8px 16px
+    ),
+    linear-gradient(140deg, var(--bg1), var(--bg2) 58%, var(--bg3));
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#world {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hud {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: min(460px, 92vw);
+  padding: 16px;
+  border: 1px solid rgba(101, 45, 24, 0.22);
+  border-radius: 10px;
+  background: var(--card);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 10px 24px rgba(20, 18, 10, 0.15);
+}
+
+.hud h1 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+}
+
+.meterWrap {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.meter {
+  height: 12px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+#chaosBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent2), var(--warn), var(--accent));
+  transition: width 0.25s ease;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tags span {
+  background: #fff8ef;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+}
+
+.choicePanel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 94vw);
+  padding: 16px;
+  border-radius: 14px;
+  border: 2px solid rgba(120, 40, 28, 0.5);
+  background: linear-gradient(180deg, rgba(255, 242, 225, 0.96), rgba(247, 221, 194, 0.96));
+  box-shadow: 0 20px 32px rgba(45, 19, 6, 0.35);
+}
+
+.choicePanel h2 {
+  margin: 0 0 6px;
+  color: #6f2418;
+}
+
+.choicePanel p {
+  margin: 0 0 12px;
+}
+
+.choiceButtons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.choiceButtons button {
+  appearance: none;
+  border: 1px solid rgba(68, 26, 14, 0.35);
+  border-radius: 10px;
+  text-align: left;
+  padding: 10px 12px;
+  font-family: "BIZ UDPGothic", "Yu Gothic UI", sans-serif;
+  font-size: 0.96rem;
+  background: #fff;
+}
+
+.choiceButtons button:hover {
+  border-color: rgba(191, 47, 31, 0.75);
+  background: #fff7ef;
+}
+
+.hidden {
+  display: none;
+}
+
+.log {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: min(480px, 94vw);
+  max-height: 42vh;
+  overflow: auto;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(15, 29, 34, 0.86);
+  color: #f6f2e6;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.25);
+  line-height: 1.45;
+}
+
+.log p {
+  margin: 0 0 8px;
+}
+
+.mobilePad {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: none;
+  gap: 8px;
+  align-items: center;
+}
+
+.mobilePad button {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-width: 56px;
+  font-size: 0.95rem;
+  background: rgba(255, 248, 235, 0.9);
+}
+
+@media (max-width: 900px) {
+  .mobilePad {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hud {
+    font-size: 0.95rem;
+  }
+
+  .log {
+    max-height: 32vh;
+  }
+}
