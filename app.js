@@ -166,6 +166,30 @@ createTorii(24, 0);
 
 const momotaro = new THREE.Group();
 const momotaroGroundY = 1.55;
+const momotaroRadius = 0.8;
+
+const obstacles = [
+  { position: mountain.position, radius: 11 },
+  { position: castle.position, radius: 5.4 },
+  { position: oldHouse.position, radius: 3.6 },
+];
+
+function resolveObstacleCollisions(position) {
+  obstacles.forEach((obstacle) => {
+    const dx = position.x - obstacle.position.x;
+    const dz = position.z - obstacle.position.z;
+    const distance = Math.sqrt(dx * dx + dz * dz);
+    const minDistance = obstacle.radius + momotaroRadius;
+    if (distance > 0 && distance < minDistance) {
+      const push = (minDistance - distance) / distance;
+      position.x += dx * push;
+      position.z += dz * push;
+    } else if (distance === 0) {
+      position.x += minDistance;
+    }
+  });
+}
+
 const torso = new THREE.Mesh(
   new THREE.CapsuleGeometry(0.8, 1.5, 4, 8),
   new THREE.MeshStandardMaterial({ color: 0xf5f1e4 })
@@ -614,6 +638,7 @@ function animate() {
     courage += 0.04;
     chaos += keys.shift ? 0.04 : 0.012;
     momotaro.position.add(move);
+    resolveObstacleCollisions(momotaro.position);
     const angle = Math.atan2(move.x, move.z);
     momotaro.rotation.y = angle;
   }
