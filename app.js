@@ -165,6 +165,7 @@ createTorii(-16, 0);
 createTorii(24, 0);
 
 const momotaro = new THREE.Group();
+const momotaroGroundY = 1.55;
 const torso = new THREE.Mesh(
   new THREE.CapsuleGeometry(0.8, 1.5, 4, 8),
   new THREE.MeshStandardMaterial({ color: 0xf5f1e4 })
@@ -213,7 +214,7 @@ flag.position.set(-0.98, 1.4, -0.5);
 flag.rotation.y = -0.4;
 
 momotaro.add(torso, hakama, belt, head, hachimaki, flagPole, flag);
-momotaro.position.set(-33, 1.2, 0);
+momotaro.position.set(-33, momotaroGroundY, 0);
 scene.add(momotaro);
 
 function createDog() {
@@ -340,7 +341,7 @@ function emergeFromPeach() {
 
   inPeach = false;
   momotaro.visible = true;
-  momotaro.position.set(-31, 1.2, 0);
+  momotaro.position.set(-31, momotaroGroundY, 0);
   latestChapter = 1;
   chaos += 2;
   statusEl.textContent = "WASD: 移動 / Space: ジャンプ / Shift: ダッシュ / E: 仲間にする / 1,2: 選択";
@@ -425,7 +426,7 @@ function resetStory() {
   storyChoices.river = null;
   storyChoices.oni = null;
 
-  momotaro.position.set(-33, 1.2, 0);
+  momotaro.position.set(-33, momotaroGroundY, 0);
   momotaro.rotation.set(0, 0, 0);
   momotaro.visible = false;
 
@@ -617,7 +618,7 @@ function animate() {
     momotaro.rotation.y = angle;
   }
 
-  if (canMove && keys[" "] && momotaro.position.y <= 1.21) {
+  if (canMove && keys[" "] && momotaro.position.y <= momotaroGroundY + 0.01) {
     velocityY = 0.22;
     chaos += 0.9;
   }
@@ -629,8 +630,8 @@ function animate() {
 
   velocityY -= 0.012;
   momotaro.position.y += velocityY;
-  if (momotaro.position.y < 1.2) {
-    momotaro.position.y = 1.2;
+  if (momotaro.position.y < momotaroGroundY) {
+    momotaro.position.y = momotaroGroundY;
     velocityY = 0;
   }
 
